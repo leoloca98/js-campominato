@@ -32,21 +32,30 @@ Quando la partita termina, comunichiamo all'utente il suo punteggio.
 
 let bombsContainer = [];
 let userNumContainer = [];
-let randomNum = 0;                                                                     //Conterrà i numeri generati random per le bombe
-let gameOver = false;                                                                  //Verrà usata come flag per il GameOver
+let randomNum = 0;                                                                      // Conterrà i numeri generati random per le bombe
+let gameOver = false;                                                                   // Verrà usata come flag per il GameOver
 
 // |INSERIMENTO DEI NUMERI BOMBA NELL'ARRAY (NO DOPPIONI)
 
 while (bombsContainer.length < 16) {
-    randomNum = Math.floor(Math.random() * (101 - 1) + 1);                             // Genero un numero random da 1 a 100 (compresi)
-    if (!bombsContainer.includes(randomNum)) {                                         // Se il numero non è incluso nell'array bombe
-        bombsContainer.push(randomNum);                                                // Allora lo pusho al suo interno
+    randomNum = Math.floor(Math.random() * (101 - 1) + 1);                              // Genero un numero random da 1 a 100 (compresi)
+    if (!bombsContainer.includes(randomNum)) {                                          // Se il numero non è incluso nell'array bombe
+        bombsContainer.push(randomNum);                                                 // Allora lo pusho al suo interno
     }
 }
 
-while (gameOver == false) {
-    const userNum = parseInt(prompt("Inserisci un numero da 1 a 100 (compresi"));      //contiene il numero scelto dall'utente
+console.table(bombsContainer);
 
+while (gameOver == false) {
+    const userNum = parseInt(prompt("Inserisci un numero da 1 a 100 (compresi)"));       // Contiene il numero scelto dall'utente
+    if (bombsContainer.includes(userNum)) {                                             // Se il numero inserito è gia nell'array delle bombe...
+        gameOver = true;                                                                 // Imposto la flag su true
+        console.log("GAME OVER");                                                       // Stampo GAME OVER (L'utente ha "colpito" una bomba)
+        console.log("Hai ottenuto il punteggio di: " + userNumContainer.length);        // Stampo il punteggio ottenuto dall'utente
+    }
+    if (!userNumContainer.includes(userNum)) {                                          // Se il numero non è presente nell'array dei numeri scelti
+        userNumContainer.push(userNum);                                                 // Pusho al suo interno il numero
+    }
 }
 
 

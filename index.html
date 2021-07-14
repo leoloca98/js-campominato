@@ -20,7 +20,7 @@
             <select name="select-difficulty" id="select-difficulty" class="ms-3">
                 <option value="100">Difficoltà 0 (100 Numeri)</option>
                 <option value="80">Difficoltà 1 (80 Numeri)</option>
-                <option value="50">Difficoltà 2 (50 Numeri)</option>
+                <option value="17">Difficoltà 2 (50 Numeri)</option>
             </select>
             <input id="difficulty-btn" type="button" value="Select Difficulty" class="mx-5 bg-dark text-danger">
         </section>
@@ -34,18 +34,23 @@
         <!-- *BUTTONS -->
         <section id="button-verify">
             <input id="verify-btn" type="button" value="Verify">
+            <h2 id="number-right"></h2>
         </section>
 
-        <!-- *COUNTER -->
-        <section id="increase" class="my-5">
-            <h4 id="counter"></h4>
+        <!-- *CHAMPION -->
+        <section id="champion" class="my-5">
+            <h2 id="winner" class="text-success mb-3"></h2>
+            <h2 class="result"></h2>
         </section>
 
         <!-- *END-GAME -->
         <section id="end-game" class="my-5">
             <h1 id="game-over" class="text-danger"></h1>
-            <h2 id="result"></h2>
-            <h2 id="number-right"></h2>
+            <h2 class="result"></h2>
+        </section>
+
+        <!-- *RESET -->
+        <section id="reset">
             <input id="reset-btn" type="button" value="reset" class="mt-5">
         </section>
     </div>

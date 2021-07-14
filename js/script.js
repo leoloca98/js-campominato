@@ -34,18 +34,19 @@ const selectDiff = document.getElementById("select-difficulty");
 const diffBtn = document.getElementById("difficulty-btn");
 const verifyBtn = document.getElementById("verify-btn");
 const youLose = document.getElementById("game-over");
-const result = document.getElementById("result");
-const counter = document.getElementById("counter");
+const result = document.getElementsByClassName("result");
 const numMessage = document.getElementById("message-number");
 const numberRight = document.getElementById("number-right");
 const resetBtn = document.getElementById("reset-btn");
+const winner = document.getElementById("winner");
 
 // |SECTION
 const gameDiffSection = document.getElementById("game-difficulty");
 const numberSection = document.getElementById("number");
 const buttonVerifySection = document.getElementById("button-verify");
-const counterSection = document.getElementById("increase");
 const endGameSection = document.getElementById("end-game");
+const championSection = document.getElementById("champion");
+const resetSection = document.getElementById("reset");
 
 
 // |ELEMENTS    
@@ -53,14 +54,19 @@ const endGameSection = document.getElementById("end-game");
 let bombsContainer = [];                                                                            // Array per le bomber
 let userNumContainer = [];                                                                          // Array per i numeri dell'utente
 let randomNum = 0;                                                                                  // Conterrà i numeri generati random per le bombe
-let userNum = 0;                                                                                    // Numero scelto dall'utente
+let userNum = 0;
+let rightNum = "";                                                                                  // Numero scelto dall'utente
 let difficulty = 100;                                                                               // Verrà usata per scegliere la difficoltà
 let gameOver = false;                                                                               // Verrà usata come flag per il GameOver 
 
 // |PREPARAZIONE
-numberSection.classList.add("d-none");                                                              // Rimuovo dal flusso la sezione NUMBER
-buttonVerifySection.classList.add("d-none");                                                        // Rimuovo dal flusso la sezione BUTTON
-endGameSection.classList.add("d-none");                                                             // Rimuovo dal flusso la sezione END-GAME
+
+gameDiffSection.classList.remove("d-none");                                                         // Rimetto nel flusso la sezione DIFFICULTY
+numberSection.classList.add("d-none");                                                              // Tolgo dal flusso la sezione NUMBER
+buttonVerifySection.classList.add("d-none");                                                        // Tolgo dal flusso la sezione BUTTON
+endGameSection.classList.add("d-none");                                                             // Tolgo dal flusso la sezione END-GAME
+championSection.classList.add("d-none");                                                            // Tolgo dal flusso la sezione CHAMPION
+resetSection.classList.add("d-none");                                                               // Tolgo dal flusso la sezione RESET
 
 // |GIOCO
 
@@ -82,7 +88,9 @@ diffBtn.addEventListener("click", function () {                                 
     gameDiffSection.classList.add("d-none");                                                        // Rimuovo dal flusso la sezione DIFFICULTY
     numberSection.classList.remove("d-none");                                                       // Rimetto nel flusso la sezione NUMBER
     buttonVerifySection.classList.remove("d-none");                                                 // Rimetto nel flusso la sezione BUTTON
-    counterSection.classList.remove("d-none");                                                      // Rimetto nel flusso la sezione COUNTER
+    endGameSection.classList.add("d-none");                                                         // Tolgo dal flusso la sezione END-GAME
+    championSection.classList.add("d-none");                                                        // Tolgo dal flusso la sezione CHAMPION
+    resetSection.classList.add("d-none");                                                           // Tolgo dal flusso la sezione RESET
 
 
     numMessage.innerHTML = "Inserire un numero da 1 a " + difficulty;                               // Messaggio che anticipa l'input del numero (in base alla difficoltà)
@@ -104,18 +112,36 @@ verifyBtn.addEventListener("click", function () {                               
                 endGameSection.classList.remove("d-none");                                          // Rimetto nel flusso la sezione END-GAME
                 numberSection.classList.add("d-none");                                              // Tolgo dal flusso la sezione NUMBER
                 buttonVerifySection.classList.add("d-none");                                        // Tolgo dal flusso la sezione BUTTON
+                gameDiffSection.classList.add("d-none");                                            // Rimetto nel flusso la sezione DIFFICULTY
+                championSection.classList.add("d-none");                                            // Tolgo dal flusso la sezione CHAMPION
+                resetSection.classList.remove("d-none");                                               // Tolgo dal flusso la sezione RESET
 
                 youLose.innerHTML = "GAME OVER";                                                    // Stampo il messaggio di sconfitta
-                result.innerHTML = "Hai ottenuto il punteggio di: " + userNumContainer.length;      // Stampo il punteggio ottenuto dall'utente 
-                numberRight.innerHTML = "Hai indovinato i seguenti numeri: " + userNumContainer;    // Stampo tutti i numeri che ha indovinato l'utente
+                result.innerHTML = "Hai ottenuto il punteggio di: " + userNumContainer.length;      // Stampo il punteggio ottenuto dall'utente
 
             }
-            if (!userNumContainer.includes(userNum)) {                                              // Se il numero non è presente nell'array dei numeri scelti                                               
+            else if (!userNumContainer.includes(userNum)) {                                         // Se il numero non è presente nell'array dei numeri scelti                                               
                 userNumContainer.push(userNum);                                                     // Pusho al suo interno il numero
                 userNumField.value = "";                                                            // Azzero il campo dei numeri
+                rightNum = rightNum + userNum + ", ";
+                numberRight.innerHTML = "Hai indovinato i seguenti numeri: " + rightNum;
             }
-            else {
+            else if (userNumContainer.includes(userNum)) {
                 alert("Numero già inserito");                                                       // ALERT per numero gia inserito
+            }
+
+            if (userNumContainer.length === (difficulty - 16)) {                                    // Controllo se l'utente ha trovato tutti i numeri non bombe
+                // |WINNER
+                numberSection.classList.add("d-none");                                              // Tolgo dal flusso la sezione NUMBER
+                buttonVerifySection.classList.add("d-none");                                        // Tolgo dal flusso la sezione BUTTON
+                endGameSection.classList.add("d-none");                                             // Tolgo dal flusso la sezione END-GAME
+                championSection.classList.remove("d-none");                                         // Rimuovo dal flusso la sezione CHAMPION
+                gameDiffSection.classList.add("d-none");                                            // Rimetto nel flusso la sezione DIFFICULTY
+                resetSection.classList.remove("d-none");                                            // Tolgo dal flusso la sezione RESET
+
+                winner.innerHTML = "HAI VINTO";
+                result.innerHTML = "Hai ottenuto il punteggio di: " + userNumContainer.length;
+
             }
         } else alert("Inserire un numero da 1 a " + difficulty + " (compresi)");                    // ALERT per numero non compreso in 1 e difficulty
 
@@ -129,10 +155,12 @@ resetBtn.addEventListener("click", function () {                                
     gameOver = false;                                                                               // Reiposto la flag su false
     bombsContainer = [];                                                                            // Svuoto l'array delle bombe
     userNumContainer = [];                                                                          // Svuoto l'array dei numeri scelti dall'utente
+    rightNum = "";                                                                                  // Azzero i numeri indovinati
 
     gameDiffSection.classList.remove("d-none");                                                     // Rimetto nel flusso la sezione DIFFICULTY
     numberSection.classList.add("d-none");                                                          // Tolgo dal flusso la sezione NUMBER
     buttonVerifySection.classList.add("d-none");                                                    // Tolgo dal flusso la sezione BUTTON
-    counterSection.classList.add("d-none");                                                         // Tolgo dal flusso la sezione COUNTER
     endGameSection.classList.add("d-none");                                                         // Tolgo dal flusso la sezione END-GAME
+    championSection.classList.add("d-none");                                                        // Tolgo dal flusso la sezione CHAMPION
+    resetSection.classList.add("d-none");                                                           // Tolgo dal flusso la sezione RESET
 });

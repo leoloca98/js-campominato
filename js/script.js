@@ -101,9 +101,12 @@ verifyBtn.addEventListener("click", function () {
             result.innerHTML = "Hai ottenuto il punteggio di: " + userNumContainer.length;      // Stampo il punteggio ottenuto dall'utente                                                   
 
         }
-        else if (!userNumContainer.includes(userNum)) {                                         // Se il numero non è presente nell'array dei numeri scelti                                               
+        if (!userNumContainer.includes(userNum)) {                                         // Se il numero non è presente nell'array dei numeri scelti                                               
             userNumContainer.push(userNum);                                                     // Pusho al suo interno il numero
             userNumField.value = "";                                                            // Azzero il campo dei numeri
+        }
+        else {
+            alert("Numero già inserito");
         }
     }
 });

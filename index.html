@@ -5,11 +5,50 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="./css/style.css">
     <title>Campo Minato</title>
 </head>
 
 <body>
+    <div class="container">
+
+        <!-- *DIFFICULTY -->
+        <section id="game-difficulty" class="my-5">
+            <label for="select-difficulty">Scegliere la difficoltà</label>
+            <select name="select-difficulty" id="select-difficulty" class="ms-3">
+                <option value="100">Difficoltà 0 (100 Numeri)</option>
+                <option value="80">Difficoltà 1 (80 Numeri)</option>
+                <option value="50">Difficoltà 2 (50 Numeri)</option>
+            </select>
+            <input id="difficulty-btn" type="button" value="Select Difficulty" class="mx-5 bg-dark text-danger">
+        </section>
+
+        <!-- *NUMBER -->
+        <section id="number" class="my-5">
+            <label for="user-number"><span id="message-number"></span></label>
+            <input id="user-number" type="number" min="1" max="100">
+        </section>
+
+        <!-- *BUTTONS -->
+        <section id="button-verify">
+            <input id="verify-btn" type="button" value="Verify">
+        </section>
+
+        <!-- *COUNTER -->
+        <section id="increase" class="my-5">
+            <h4 id="counter"></h4>
+        </section>
+
+        <!-- *END-GAME -->
+        <section id="end-game" class="my-5">
+            <h1 id="game-over" class="text-danger"></h1>
+            <h2 id="result"></h2>
+        </section>
+    </div>
+
+    <!-- *SCRIPT -->
     <script src="./js/script.js"></script>
 </body>
 

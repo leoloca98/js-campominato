@@ -17,7 +17,7 @@ Quando la partita termina, comunichiamo all'utente il suo punteggio.
 // 1 - Creare un array che conterrà le bombe
 // 2 - Generare numeri random da 1 a 100 (compresi)
 // 3 - Controllare se i numeri sono contenuti nell'array delle bombe, se no aggiungerli. Se si richiedere finchè non si arriva a 16 bombe
-// 4 - Creare un array che conterrà i numeri scelti dall'utente
+// 4 - Creare un array che conterrà i numeri scelti dall'utente.
 
 // * LOGICA DEL GIOCO
 // 1 - Chiedere il numero all'utente
